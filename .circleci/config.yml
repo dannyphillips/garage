@@ -1,0 +1,23 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/garage
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Install Dependencies
+          command: yarn
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run:
+          name: Build App
+          command: yarn run build
+      # - run:
+      #     name: Deploy to Firebase
+      #     command: yarn run deploy -- --token=$FIREBASE_TOKEN
