@@ -7,9 +7,10 @@
     "@types/node": "20.8.9",
     "@types/react": "^17.0.39",
     "@types/react-dom": "18.2.14",
+    "ajv": "^8.18.0",
     "react": "17.0.2",
     "react-dom": "18.2.0",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^5.0.1",
     "ts-jest": "29.1.1",
     "typescript": "5.2.2"
   },
@@ -34,6 +35,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {}
+  }
 }
