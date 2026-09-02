@@ -1,39 +1,37 @@
 {
-  "name": "portfolio",
-  "version": "0.1.0",
+  "name": "garage",
+  "version": "1.0.0",
   "private": true,
-  "dependencies": {
-    "@types/jest": "29.5.5",
-    "@types/node": "20.8.9",
-    "@types/react": "^17.0.39",
-    "@types/react-dom": "18.2.14",
-    "react": "17.0.2",
-    "react-dom": "18.2.0",
-    "react-scripts": "4.0.3",
-    "ts-jest": "29.1.1",
-    "typescript": "5.2.2"
+  "type": "module",
+  "workspaces": [
+    "apps/*"
+  ],
+  "bin": {
+    "garage": "./bin/garage"
   },
-  "homepage": "https://danny-phillips.firebaseapp.com",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "vite",
+    "build:garage": "tsc --noEmit && vite build",
+    "build:apps": "node scripts/lib/build-apps.mjs",
+    "sync-catalog": "node scripts/garage.mjs sync-catalog",
+    "prebuild": "npm run sync-catalog",
+    "build": "npm run build:garage && npm run build:apps",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "garage": "node scripts/garage.mjs",
+    "deploy": "node scripts/garage.mjs deploy --all"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.3",
+    "firebase-tools": "^13.29.1",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.10",
+    "vitest": "^2.1.4"
+  }
 }

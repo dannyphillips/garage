@@ -1,0 +1,19 @@
+{
+  "id": "demo-app",
+  "name": "Demo App",
+  "tagline": "Monorepo example",
+  "description": "Demo App — built in the Garage monorepo and hosted at demo-app.dannyphillips.io.",
+  "subdomain": "demo-app",
+  "icon": "📱",
+  "category": "experiments",
+  "status": "dev",
+  "featured": false,
+  "tags": [
+    "new"
+  ],
+  "updatedAt": "2026-09-02",
+  "firebase": {
+    "site": "demo-app",
+    "target": "demo-app"
+  }
+}

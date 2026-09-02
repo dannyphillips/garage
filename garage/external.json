@@ -1,0 +1,57 @@
+[
+  {
+    "id": "baby-dictionary",
+    "name": "Baby Dictionary",
+    "tagline": "Track the words babies learn over time",
+    "description": "A gentle journal for capturing first words, phrases, and milestones as language develops.",
+    "url": "https://baby.dannyphillips.io",
+    "icon": "👶",
+    "category": "home",
+    "status": "live",
+    "featured": true,
+    "tags": ["family", "journal", "react"],
+    "updatedAt": "2025-08-12",
+    "external": true
+  },
+  {
+    "id": "equipment-tracker",
+    "name": "Equipment Tracker",
+    "tagline": "Construction site equipment at a glance",
+    "description": "Monitor equipment status across job sites — who has what, where it is, and when it needs attention.",
+    "url": "https://equipment.dannyphillips.io",
+    "icon": "🏗️",
+    "category": "productivity",
+    "status": "live",
+    "featured": true,
+    "tags": ["construction", "inventory", "react"],
+    "updatedAt": "2025-06-20",
+    "external": true
+  },
+  {
+    "id": "aquario",
+    "name": "Aquario",
+    "tagline": "Aquarium monitoring made simple",
+    "description": "Watch tank health, temperature trends, and alerts from one dashboard.",
+    "url": "https://aquario.dannyphillips.io",
+    "icon": "🐠",
+    "category": "monitoring",
+    "status": "beta",
+    "featured": true,
+    "tags": ["iot", "sensors", "react"],
+    "updatedAt": "2025-04-03",
+    "external": true
+  },
+  {
+    "id": "portfolio",
+    "name": "About Me",
+    "tagline": "Personal site and writing",
+    "description": "The main landing page — background, projects, and links.",
+    "url": "https://dannyphillips.me",
+    "icon": "✨",
+    "category": "experiments",
+    "status": "live",
+    "tags": ["personal", "writing"],
+    "updatedAt": "2025-01-10",
+    "external": true
+  }
+]

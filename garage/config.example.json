@@ -1,0 +1,20 @@
+{
+  "domain": "dannyphillips.io",
+  "appsSubdomain": "apps",
+  "owner": "Danny Phillips",
+  "firebase": {
+    "project": "danny-phillips",
+    "garageSite": "danny-phillips",
+    "garageTarget": "garage"
+  },
+  "porkbun": {
+    "domain": "dannyphillips.io"
+  },
+  "dns": {
+    "type": "CNAME",
+    "ttl": 600
+  },
+  "github": {
+    "owner": "dannyphillips"
+  }
+}
