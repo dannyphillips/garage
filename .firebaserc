@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "danny-phillips"
+  },
+  "targets": {
+    "danny-phillips": {
+      "hosting": {
+        "garage": [
+          "danny-phillips"
+        ],
+        "demo-app": [
+          "demo-app"
+        ]
+      }
+    }
   }
 }
