@@ -1,12 +1,11 @@
 import { useMemo, useState } from 'react';
 import { catalog, categoryLabels } from './data/apps';
 import type { AppCategory } from './types/app';
-import { AppCard } from './components/AppCard';
-import { FeaturedRow } from './components/FeaturedRow';
-import { Header } from './components/Header';
-import { Hero } from './components/Hero';
+import { Header, StoreNav } from './components/Header';
 import { Footer } from './components/Footer';
-import { StatsBar } from './components/StatsBar';
+import { SpotlightCard } from './components/SpotlightCard';
+import { FeaturedCarousel } from './components/FeaturedCarousel';
+import { AppListRow } from './components/AppListRow';
 import './App.css';
 
 type FilterCategory = 'all' | AppCategory;
@@ -19,6 +18,9 @@ function App() {
     () => catalog.apps.filter((app) => app.featured),
     [],
   );
+
+  const spotlightApp = featuredApps[0] ?? catalog.apps[0];
+  const carouselApps = featuredApps.slice(1);
 
   const filteredApps = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
@@ -45,71 +47,64 @@ function App() {
   }, [category, query]);
 
   const categories = Object.keys(categoryLabels) as FilterCategory[];
+  const showEditorial = !query && category === 'all';
 
   return (
-    <div className="garage">
-      <div className="ambient-glow" aria-hidden="true" />
-      <Header />
-      <main className="garage-main">
-        <Hero
-          appCount={catalog.apps.length}
-          domain={catalog.domain}
-          query={query}
-          onQueryChange={setQuery}
-        />
+    <div className="store">
+      <Header query={query} onQueryChange={setQuery} />
+      <StoreNav />
 
-        <StatsBar apps={catalog.apps} />
-
-        {featuredApps.length > 0 && !query && category === 'all' && (
-          <FeaturedRow apps={featuredApps} />
+      <main className="store-main">
+        {showEditorial && spotlightApp && (
+          <section className="today" aria-label="Featured">
+            <SpotlightCard app={spotlightApp} />
+          </section>
         )}
 
-        <section className="catalog" aria-labelledby="catalog-heading">
-          <div className="catalog-header">
-            <div>
-              <h2 id="catalog-heading">Browse</h2>
-              <p className="catalog-subtitle">
-                {filteredApps.length}{' '}
-                {filteredApps.length === 1 ? 'app' : 'apps'}
-                {query ? ` matching “${query}”` : ''}
-              </p>
-            </div>
+        {showEditorial && carouselApps.length > 0 && (
+          <FeaturedCarousel apps={carouselApps} />
+        )}
 
-            <div
-              className="category-tabs"
-              role="tablist"
-              aria-label="Filter by category"
-            >
-              {categories.map((value) => (
-                <button
-                  key={value}
-                  type="button"
-                  role="tab"
-                  aria-selected={category === value}
-                  className={
-                    category === value
-                      ? 'category-tab active'
-                      : 'category-tab'
-                  }
-                  onClick={() => setCategory(value)}
-                >
-                  {categoryLabels[value]}
-                </button>
-              ))}
-            </div>
+        <section className="shelf" aria-labelledby="apps-heading">
+          <div className="shelf-header">
+            <h2 id="apps-heading">
+              {query ? 'Results' : category === 'all' ? 'All Apps' : categoryLabels[category]}
+            </h2>
+            {!query && (
+              <p>{filteredApps.length} {filteredApps.length === 1 ? 'app' : 'apps'}</p>
+            )}
+          </div>
+
+          <div
+            className="category-rail"
+            role="tablist"
+            aria-label="Categories"
+          >
+            {categories.map((value) => (
+              <button
+                key={value}
+                type="button"
+                role="tab"
+                aria-selected={category === value}
+                className={
+                  category === value ? 'category-chip active' : 'category-chip'
+                }
+                onClick={() => setCategory(value)}
+              >
+                {categoryLabels[value]}
+              </button>
+            ))}
           </div>
 
           {filteredApps.length > 0 ? (
-            <ul className="app-grid">
+            <ul className="app-list">
               {filteredApps.map((app) => (
-                <li key={app.id}>
-                  <AppCard app={app} />
-                </li>
+                <AppListRow key={app.id} app={app} />
               ))}
             </ul>
           ) : (
             <div className="empty-state">
-              <p>No apps match your search.</p>
+              <p>No apps found.</p>
               <button
                 type="button"
                 className="text-button"
@@ -118,12 +113,13 @@ function App() {
                   setCategory('all');
                 }}
               >
-                Clear filters
+                Clear search
               </button>
             </div>
           )}
         </section>
       </main>
+
       <Footer domain={catalog.domain} subdomain={catalog.appsSubdomain} />
     </div>
   );
